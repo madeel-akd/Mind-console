@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mind Console</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Login screen -->
+  <section id="login-screen" class="screen">
+    <form id="login-form" class="login-card">
+      <h1>Mind Console</h1>
+      <p class="sub">Your capture, priority and progress system.</p>
+      <input type="text" id="login-username" placeholder="username" autocomplete="username" required />
+      <input type="password" id="login-password" placeholder="password" autocomplete="current-password" required />
+      <button type="submit">Enter</button>
+      <p id="login-error" class="error-text"></p>
+    </form>
+  </section>
+
+  <!-- Main app -->
+  <section id="app-screen" class="screen hidden">
+    <header class="topbar">
+      <h1>Mind Console</h1>
+      <nav class="tabs">
+        <button class="tab-btn active" data-tab="now">Now</button>
+        <button class="tab-btn" data-tab="history">History</button>
+        <button class="tab-btn" data-tab="summary">Summary</button>
+      </nav>
+      <button id="logout-btn" class="ghost-btn">Log out</button>
+    </header>
+
+    <form id="capture-form" class="capture-bar">
+      <textarea id="capture-input" rows="1" placeholder="Empty a thought here... (Enter to save, Shift+Enter for a new line)"></textarea>
+      <select id="capture-priority">
+        <option value="none">No priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <input type="date" id="capture-deadline" />
+      <button type="submit">Add</button>
+    </form>
+
+    <main>
+      <div id="now-tab" class="tab-panel active">
+        <div id="now-list" class="item-list"></div>
+        <p id="now-empty" class="empty-state hidden">Nothing on your mind right now. Good.</p>
+      </div>
+
+      <div id="history-tab" class="tab-panel">
+        <div id="history-list" class="item-list"></div>
+        <p id="history-empty" class="empty-state hidden">Nothing completed yet.</p>
+      </div>
+
+      <div id="summary-tab" class="tab-panel">
+        <button id="summary-btn" class="primary-btn">Summarize everything</button>
+        <div id="summary-output" class="summary-output"></div>
+      </div>
+    </main>
+  </section>
+
+  <!-- Item card template -->
+  <template id="item-template">
+    <article class="item-card">
+      <div class="item-main">
+        <p class="item-content"></p>
+        <div class="item-meta">
+          <span class="badge priority-badge"></span>
+          <span class="deadline-badge"></span>
+        </div>
+        <div class="progress-notes"></div>
+      </div>
+      <div class="item-actions">
+        <select class="priority-select">
+          <option value="none">No priority</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <button class="progress-toggle-btn" title="Add progress note">+ note</button>
+        <button class="progress-toggle-btn advance-btn" title="Move forward"></button>
+        <button class="delete-btn" title="Delete">×</button>
+      </div>
+      <form class="progress-form hidden">
+        <input type="text" class="progress-input" placeholder="quick progress note..." />
+      </form>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
